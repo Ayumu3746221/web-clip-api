@@ -11,14 +11,15 @@
 ## アカウント認証
 
 ```bash
-POST /api/v1/user
+GET /api/v1/auth/${provider}
 ```
-- 新規ユーザーを登録する。
+- ${Provider}のOAuth認証を実施する。
 
 ```bash
-POST /api/v1/auth/token
+GET /api/v1/auth/${provider}/callback
 ```
-- 認証コード等を受け取って、レスポンスでJWTを返す。
+- /api/v1/auth/${provider}のコールバック先
+- このエンドポイントのイベントハンドラ内でJWTを発行する。
 
 ## クリップ
 
