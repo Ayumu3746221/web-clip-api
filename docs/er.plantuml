@@ -10,9 +10,9 @@ entity "Users" as user {
 entity "UserAuthentications" as user_auth {
     +id: String <<PK>> :"シーケンス"
     ---
-    +user_id: String <<FK>> :"index"
+    +user_id: String <<FK>>
     +provider: String
-    +provider_user_id: String
+    +provider_user_id: String :"index"
 }
 
 entity "Clips" as clip {
@@ -40,6 +40,7 @@ entity "ClipTags" as clip_tag {
 }
 
 user ||--o{ clip
+user ||--o{ user_auth
 clip ||--o{ clip_tag
 tag ||--o{ clip_tag
 @enduml

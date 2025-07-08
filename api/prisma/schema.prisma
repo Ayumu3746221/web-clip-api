@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "[driverAdapters]"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId Int @id @default(autoincrement()) @map("user_id")
+  email String @unique
+  username String
+
+  clips Clip[]
+  userAuthentications UserAuthentication[]
+
+  @@map("Users")
+}
+
+model UserAuthentication {
+  id             String @id @default(cuid())
+  userId         Int    @map("user_id")
+  provider       String
+  providerUserId String @map("provider_user_id")
+
+  user User @relation(fields: [userId], references: [userId])
+
+  @@index([providerUserId])
+  @@map("UserAuthentications")
+}
+
+model Clip {
+  clipId      String   @id @default(cuid()) @map("clip_id")
+  userId      Int      @map("user_id")
+  clipName    String   @map("clip_name")
+  clipComment String   @map("clip_comment")
+  clipUrl     String   @map("clip_url")
+  createDate  DateTime @default(now()) @map("create_date")
+  updateDate  DateTime @updatedAt @map("update_date")
+
+  user     User      @relation(fields: [userId], references: [userId])
+  clipTags ClipTag[]
+
+  @@index([userId])
+  @@index([clipName])
+  @@map("Clips")
+}
+
+model Tag {
+  tagId      String   @id @default(cuid()) @map("tag_id")
+  tagName    String   @unique @map("tag_name")
+  createDate DateTime @default(now()) @map("create_date")
+  updateDate DateTime @updatedAt @map("update_date")
+
+  clipTags ClipTag[]
+
+  @@map("Tags")
+}
+
+model ClipTag {
+  clipId String @map("clip_id")
+  tagId  String @map("tag_id")
+
+  clip Clip @relation(fields: [clipId], references: [clipId])
+  tag  Tag  @relation(fields: [tagId], references: [tagId])
+
+  @@id([clipId, tagId])
+  @@map("ClipTags")
+}
