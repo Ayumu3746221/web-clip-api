@@ -7,6 +7,14 @@ entity "Users" as user {
     +username: String
 }
 
+entity "UserAuthentications" as user_auth {
+    +id: String <<PK>> :"シーケンス"
+    ---
+    +user_id: String <<FK>> :"index"
+    +provider: String
+    +provider_user_id: String
+}
+
 entity "Clips" as clip {
     +clip_id: String <<PK>>
     ---
