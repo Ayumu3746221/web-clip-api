@@ -1,0 +1,37 @@
+@startuml er
+
+entity "Users" as user {
+    +user_id: String <<PK>> :"シーケンス"
+    ---
+    +email: String <<UK>> :"index"
+    +username: String
+}
+
+entity "Clips" as clip {
+    +clip_id: String <<PK>>
+    ---
+    +user_id: String <<FK>> :"index"
+    +clip_name: String :"index"
+    +clip_comment: String
+    +clip_url: String
+    +create_date: Date
+    +update_date: Date
+}
+
+entity "Tags" as tag {
+    +tag_id: String <<PK>>
+    ---
+    +tag_name: String <<UK>> :"index"
+    +create_date: Date
+    +update_date: Date
+}
+
+entity "ClipTags" as clip_tag {
+    +clip_id: String <<FK>>
+    +tag_id: String <<FK>>
+}
+
+user ||--o{ clip
+clip ||--o{ clip_tag
+tag ||--o{ clip_tag
+@enduml
