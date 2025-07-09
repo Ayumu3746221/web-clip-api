@@ -1,9 +1,13 @@
 import { Hono } from 'hono'
 import type { D1Database } from '@cloudflare/workers-types';
 import { createDbClient, DrizzleClient } from './db/client';
+import authRouter from './routes/auth.route';
 
 export interface Bindings{
   DB: D1Database;
+  JWT_SECRET: string;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
 }
 
 export type Variables = {
@@ -32,8 +36,10 @@ app.get('/', async (c) => {
   return c.json({
     status: "ok",
     message: "DB connection successful!",
-    user: user, // 取得したデータをレスポンスに含める
+    user: user,
   });
 })
+
+app.route('/api/v1/auth', authRouter)
 
 export default app
