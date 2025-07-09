@@ -1,24 +1,24 @@
 @startuml er
 
 entity "Users" as user {
-    +user_id: String <<PK>> :"シーケンス"
+    +user_id: Integer <<PK>> :"シーケンス"
     ---
     +email: String <<UK>> :"index"
     +username: String
 }
 
 entity "UserAuthentications" as user_auth {
-    +id: String <<PK>> :"シーケンス"
+    +id: Integer <<PK>> :"シーケンス"
     ---
-    +user_id: String <<FK>>
+    +user_id: Integer <<FK>>
     +provider: String
     +provider_user_id: String :"index"
 }
 
 entity "Clips" as clip {
-    +clip_id: String <<PK>>
+    +clip_id: Integer <<PK>>
     ---
-    +user_id: String <<FK>> :"index"
+    +user_id: Integer <<FK>> :"index"
     +clip_name: String :"index"
     +clip_comment: String
     +clip_url: String
@@ -27,7 +27,7 @@ entity "Clips" as clip {
 }
 
 entity "Tags" as tag {
-    +tag_id: String <<PK>>
+    +tag_id: Integer <<PK>>
     ---
     +tag_name: String <<UK>> :"index"
     +create_date: Date
@@ -35,8 +35,8 @@ entity "Tags" as tag {
 }
 
 entity "ClipTags" as clip_tag {
-    +clip_id: String <<FK>>
-    +tag_id: String <<FK>>
+    +clip_id: Integer <<FK>>
+    +tag_id: Integer <<FK>>
 }
 
 user ||--o{ clip
