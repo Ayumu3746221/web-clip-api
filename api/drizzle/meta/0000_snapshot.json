@@ -1,0 +1,328 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "d3b01c6d-f996-403c-8f50-fc8949099fbe",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "ClipTags": {
+      "name": "ClipTags",
+      "columns": {
+        "clip_id": {
+          "name": "clip_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tag_id": {
+          "name": "tag_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ClipTags_clip_id_Clips_clip_id_fk": {
+          "name": "ClipTags_clip_id_Clips_clip_id_fk",
+          "tableFrom": "ClipTags",
+          "tableTo": "Clips",
+          "columnsFrom": [
+            "clip_id"
+          ],
+          "columnsTo": [
+            "clip_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ClipTags_tag_id_Tags_tag_id_fk": {
+          "name": "ClipTags_tag_id_Tags_tag_id_fk",
+          "tableFrom": "ClipTags",
+          "tableTo": "Tags",
+          "columnsFrom": [
+            "tag_id"
+          ],
+          "columnsTo": [
+            "tag_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ClipTags_clip_id_tag_id_pk": {
+          "columns": [
+            "clip_id",
+            "tag_id"
+          ],
+          "name": "ClipTags_clip_id_tag_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Clips": {
+      "name": "Clips",
+      "columns": {
+        "clip_id": {
+          "name": "clip_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "clip_name": {
+          "name": "clip_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "clip_comment": {
+          "name": "clip_comment",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "clip_url": {
+          "name": "clip_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "create_date": {
+          "name": "create_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'CURRENT_TIMESTAMP'"
+        },
+        "update_date": {
+          "name": "update_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'CURRENT_TIMESTAMP'"
+        }
+      },
+      "indexes": {
+        "Clips_user_id_idx": {
+          "name": "Clips_user_id_idx",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": false
+        },
+        "Clips_clip_name_idx": {
+          "name": "Clips_clip_name_idx",
+          "columns": [
+            "clip_name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "Clips_user_id_Users_user_id_fk": {
+          "name": "Clips_user_id_Users_user_id_fk",
+          "tableFrom": "Clips",
+          "tableTo": "Users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Tags": {
+      "name": "Tags",
+      "columns": {
+        "tag_id": {
+          "name": "tag_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tag_name": {
+          "name": "tag_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "create_date": {
+          "name": "create_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'CURRENT_TIMESTAMP'"
+        },
+        "update_date": {
+          "name": "update_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'CURRENT_TIMESTAMP'"
+        }
+      },
+      "indexes": {
+        "Tags_tag_name_unique": {
+          "name": "Tags_tag_name_unique",
+          "columns": [
+            "tag_name"
+          ],
+          "isUnique": true
+        },
+        "Tags_tag_name_idx": {
+          "name": "Tags_tag_name_idx",
+          "columns": [
+            "tag_name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "UserAuthentications": {
+      "name": "UserAuthentications",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "provider_user_id": {
+          "name": "provider_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "UserAuthentications_provider_user_id_idx": {
+          "name": "UserAuthentications_provider_user_id_idx",
+          "columns": [
+            "provider_user_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "UserAuthentications_user_id_Users_user_id_fk": {
+          "name": "UserAuthentications_user_id_Users_user_id_fk",
+          "tableFrom": "UserAuthentications",
+          "tableTo": "Users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Users": {
+      "name": "Users",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Users_email_unique": {
+          "name": "Users_email_unique",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        },
+        "Users_email_idx": {
+          "name": "Users_email_idx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
